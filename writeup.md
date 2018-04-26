@@ -1,3 +1,7 @@
+[pcontrol]: ./PController.png "P Controller"
+[pdcontrol]: ./PDController.png "PD Controller"
+[pidcontrol]: ./PIDController.png "PID Controller"
+
 # Udacity PID Controller Project
 
 The goal of this project was to implement a PID Controller in C++ to control a vehicle around a test track - in simulation. As the simulated car drives around the track, the vehicle feeds out the cross track error of the vehicle for each frame of the sim.
@@ -12,13 +16,25 @@ The *P* component is arguably the main and heaviest hitting component of the ful
 
 The trouble is, if we use the *P* component alone, there will be a tendancy (almost a certainty) that we will overshoot the intended trajectory line. Which will then cause P to respond by turning back to the target trajectory again, and so on. The effect is that we ended up with a 'wobble' around the trajectory line, which is not ideal for a passenger vehicle.
 
+The graph below shows the effect of *P* in relation to the car trajecctory (red line).
+
+![Alt Text][pcontrol]
+
 ## Component D
 
 *D* acts as a dampening on top of *P*. As before *P* turns the car back to the trajectory... but will overshoot the trajectory, as the vehicle approaches the trajectory we add in *D* to increase as the vehicle nears the target trajectory. *D* in effect lessens the impact of *P* as we approach the trajectory, thus dampening the effect of *P* when the CTE is low, bringing the vehicle onto line and hopefully eliminating the 'wobble'.
 
+The graph below shows the effect that *D* has - the green line - over the *P* only method. The difference is significant.
+
+![Alt Text][pdcontrol]
+
 ## Component I
 
 Finally, the *I* component affects bias in the vehicle. The anaolgy given is that the vehicle wants to track constantly left or right (such as may be with a car with misaligned wheels / axel). The *I* component adds an opposite bias to negate that effect. 
+
+The last graph shows the effect of the full PID controller with systematic bias applied. You can see the green line overshoots but gently merges with the target trajectory.
+
+![Alt Text][pidcontrol]
 
 ## Project Implementation
 
